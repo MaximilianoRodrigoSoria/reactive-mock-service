@@ -19,11 +19,13 @@ public class MockService {
 
     public Mono<MockDTO> save(MockDTO mockDTO){
         return Mono.just(mockDTO)
-        .flatMap(MockDTO::toDocument)
+        .map(MockDTO::toDocument)
         .flatMap(repository::save)
-        .flatMap(Mock::toDTO);
+        .map(Mock::toDTO);
 
 
     }
+
+
 
 }

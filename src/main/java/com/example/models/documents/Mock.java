@@ -36,10 +36,10 @@ public class Mock implements Serializable {
     private Date lastUpdate;
 
 
-    public static Mono<MockDTO> toDTO(Mock mock){
+    public static MockDTO toDTO(Mock mock){
         MockDTO mockDTO = new MockDTO();
         BeanUtils.copyProperties(mock, mockDTO);
-        return Mono.just(mockDTO);
+        return mockDTO;
     }
 
 }

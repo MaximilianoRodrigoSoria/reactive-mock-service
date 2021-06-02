@@ -32,10 +32,10 @@ public class MockDTO {
     @JsonProperty("last_update")
     private Date lastUpdate;
 
-    public static Mono<Mock> toDocument(MockDTO mockDTO){
+
+    public static Mock toDocument(MockDTO mockDTO){
         Mock mock = new Mock();
-        System.out.println(mockDTO.toString());
         BeanUtils.copyProperties(mockDTO, mock);
-        return Mono.just(mock).doOnNext(e  ->System.out.println(e.toString()));
+        return mock;
     }
 }

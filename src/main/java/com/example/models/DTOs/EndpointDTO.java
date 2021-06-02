@@ -38,10 +38,10 @@ public class EndpointDTO implements Serializable {
     private Date lastUpdate;
 
 
-    public static Mono<Endpoint> toDocument(EndpointDTO endpointDTO){
+    public static Endpoint toDocument(EndpointDTO endpointDTO){
         Endpoint endpoint = new Endpoint();
         BeanUtils.copyProperties(endpointDTO, endpoint);
-        return Mono.just(endpoint);
+        return endpoint;
     }
 
 }

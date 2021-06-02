@@ -35,9 +35,9 @@ public class Endpoint implements Serializable {
     @JsonProperty("last_update")
     private Date lastUpdate;
 
-    public static Mono<EndpointDTO> toDTO(Endpoint endpoint){
+    public static EndpointDTO toDTO(Endpoint endpoint){
         EndpointDTO endpointDTO = new EndpointDTO();
         BeanUtils.copyProperties(endpoint, endpointDTO);
-        return Mono.just(endpointDTO);
+        return endpointDTO;
     }
 }

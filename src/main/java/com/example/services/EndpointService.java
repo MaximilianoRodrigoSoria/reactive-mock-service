@@ -19,9 +19,9 @@ public class EndpointService {
 
     public Mono<EndpointDTO> save(EndpointDTO endpointDTO){
         return Mono.just(endpointDTO)
-                .flatMap(EndpointDTO::toDocument)
+                .map(EndpointDTO::toDocument)
                 .flatMap(repository::save)
-                .flatMap(Endpoint::toDTO);
+                .map(Endpoint::toDTO);
 
     }
 }
