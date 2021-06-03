@@ -5,6 +5,7 @@ import com.example.models.documents.Mock;
 import com.example.models.repositories.MockReactiveRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @Service
@@ -26,6 +27,10 @@ public class MockService {
 
     }
 
+    public Flux<MockDTO> findAll()
+    {
+        return repository.findAll().map(Mock::toDTO);
+    }
 
 
 }

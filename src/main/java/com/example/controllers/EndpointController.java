@@ -7,11 +7,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
+
+import java.util.List;
 
 @RestController
 @RequestMapping(value="/api/v1")
@@ -36,4 +36,11 @@ public class EndpointController {
 
     }
 
+    @GetMapping("/endpoint")
+    public Mono<ResponseEntity<List<EndpointDTO>>> findAll(){
+        return this.service.findAll().collectList()
+                .map(r -> new ResponseEntity<List<EndpointDTO>>(r, HttpStatus.OK))
+                .doOnNext(r-> log.info(r.getBody().toString()))
+                .doOnError(e -> new ResponseEntity<EndpointDTO>(HttpStatus.BAD_REQUEST));
+    }
 }
